@@ -3,6 +3,7 @@
 #include "CoreMinimal.h"
 #include "Fortune/Collectable/Collectable.h"
 #include "GameFramework/Actor.h"
+#include "GameFramework/RotatingMovementComponent.h"
 #include "Coin.generated.h"
 
 UCLASS()
@@ -15,6 +16,9 @@ public:
 
 	UPROPERTY(VisibleAnywhere)
 	UStaticMeshComponent* CoinMesh;
+
+	UPROPERTY(VisibleAnywhere)
+	URotatingMovementComponent* RotatingMovementComponent;
 	
 protected:
 	virtual void BeginPlay() override;

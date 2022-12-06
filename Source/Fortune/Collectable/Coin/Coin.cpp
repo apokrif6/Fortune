@@ -8,6 +8,8 @@ ACoin::ACoin()
 	CoinMesh->SetStaticMesh(CoinMeshAsset.Object);
 	CoinMesh->SetCollisionProfileName(TEXT("Trigger"));
 	CoinMesh->SetupAttachment(RootComponent);
+
+	RotatingMovementComponent = CreateDefaultSubobject<URotatingMovementComponent>(TEXT("Rotating movement"));
 }
 
 void ACoin::BeginPlay()
