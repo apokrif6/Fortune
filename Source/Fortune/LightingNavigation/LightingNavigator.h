@@ -16,6 +16,12 @@ public:
 	UPROPERTY(EditAnywhere, Category = TriggerCollider)
 	UBoxComponent* Trigger;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Meta = (MakeEditWidget))
+	FVector StartLocation;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Meta = (MakeEditWidget))
+	FVector TargetLocation;
+	
 	UFUNCTION()
 	void OnTrigger(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent,
 		int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
