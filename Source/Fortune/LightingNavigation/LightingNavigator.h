@@ -3,6 +3,7 @@
 #include "CoreMinimal.h"
 #include "Components/BoxComponent.h"
 #include "Engine/StaticMeshActor.h"
+#include "Particles/ParticleSpriteEmitter.h"
 #include "LightingNavigator.generated.h"
 
 UCLASS()
@@ -16,11 +17,14 @@ public:
 	UPROPERTY(EditAnywhere, Category = TriggerCollider)
 	UBoxComponent* Trigger;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Meta = (MakeEditWidget))
-	FVector StartLocation;
+	UPROPERTY(EditAnywhere, Category = ParticleEffect)
+	UParticleSystem* LightingParticle;
 
+	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Meta = (MakeEditWidget))
 	FVector TargetLocation;
+	
+	FVector StartLocation;
 	
 	UFUNCTION()
 	void OnTrigger(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent,
@@ -32,6 +36,8 @@ public:
 
 private:
 	FTimerHandle ActivityHandler;
+
+	FVector GlobalTargetLocation;
 	
 	bool CanBeTriggered = true;
 
