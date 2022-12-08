@@ -2,6 +2,7 @@
 
 #include "TexAlignTools.h"
 #include "Components/BoxComponent.h"
+#include "Components/TimelineComponent.h"
 #include "Fortune/FortuneCharacter.h"
 #include "Kismet/GameplayStatics.h"
 #include "Particles/ParticleSystemComponent.h"
@@ -24,7 +25,7 @@ void ALightingNavigator::BeginPlay()
 
 	Trigger->OnComponentBeginOverlap.AddDynamic(this, &ALightingNavigator::OnTrigger);
 
-	StartLocation = GetActorLocation();
+	GlobalStartLocation = GetActorLocation();
 	
 	GlobalTargetLocation = GetTransform().TransformPosition(TargetLocation);
 }
@@ -38,9 +39,9 @@ void ALightingNavigator::Appear()
 {
 	MarkAsTriggered();
 	
-	UParticleSystemComponent* Test = UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), LightingParticle, StartLocation);
+	LightingParticleSystemComponent = UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), LightingParticle, GlobalStartLocation);
 
-	Test->MoveComponent();
+	MoveEffect();
 	
 	if (GEngine)
 	{
@@ -65,6 +66,20 @@ void ALightingNavigator::MarkAsReady()
 	CanBeTriggered = true;
 }
 
+void ALightingNavigator::MoveEffect()
+{
+	if (MovingCurve)
+	{
+		FOnTimelineFloat ProgressFunction;
+
+		ProgressFunction.BindUFunction(this, HandleRequestFunctionName);
+
+		Timeline.AddInterpFloat(MovingCurve, ProgressFunction);
+
+		Timeline.PlayFromStart();
+	}
+}
+
 
 void ALightingNavigator::OnTrigger(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent,
 	int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
@@ -80,3 +95,10 @@ void ALightingNavigator::OnTrigger(UPrimitiveComponent* OverlappedComponent, AAc
 	}
 }
 
+void ALightingNavigator::HandleMovingProgress(float Value)
+{
+	const FVector LocationToMove = FMath::Lerp(GlobalStartLocation, GlobalTargetLocation, Value);
+
+	LightingParticleSystemComponent->SetWorldLocation(LocationToMove);
+	//LightingParticleSystemComponent->SetRelativeLocation(LocationToMove);
+}
