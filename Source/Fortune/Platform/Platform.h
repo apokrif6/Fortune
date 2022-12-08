@@ -21,9 +21,6 @@ public:
 	FTimeline Timeline;
 
 	UPROPERTY(EditAnywhere, Category = "Timeline")
-	float MaxHeight;
-
-	UPROPERTY(EditAnywhere, Category = "Timeline")
 	UCurveFloat* CurveFloat;
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Meta = (MakeEditWidget))
