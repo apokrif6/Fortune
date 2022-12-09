@@ -17,6 +17,8 @@ ALightingNavigator::ALightingNavigator()
 
 	static ConstructorHelpers::FObjectFinder<UParticleSystem> Particle(TEXT("/Game/StarterContent/Particles/P_Sparks.P_Sparks"));
 	LightingParticle = Particle.Object;
+
+	PrimaryActorTick.bCanEverTick = true;
 }
 
 void ALightingNavigator::BeginPlay()
@@ -33,6 +35,8 @@ void ALightingNavigator::BeginPlay()
 void ALightingNavigator::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+
+	Timeline.TickTimeline(DeltaTime);
 }
 
 void ALightingNavigator::Appear()
@@ -100,5 +104,4 @@ void ALightingNavigator::HandleMovingProgress(float Value)
 	const FVector LocationToMove = FMath::Lerp(GlobalStartLocation, GlobalTargetLocation, Value);
 
 	LightingParticleSystemComponent->SetWorldLocation(LocationToMove);
-	//LightingParticleSystemComponent->SetRelativeLocation(LocationToMove);
 }
