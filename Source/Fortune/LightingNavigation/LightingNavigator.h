@@ -27,8 +27,8 @@ public:
 	UPROPERTY(EditAnywhere, Category = "Timeline")
 	UCurveFloat* MovingCurve;
 
-	UPROPERTY(EditAnywhere, Category = "EffectSpeed")
-	float Speed;
+	UPROPERTY(EditAnywhere, Category = "Timeline")
+	float SecondsToArriveTarget = 1.f;
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Meta = (MakeEditWidget))
 	FVector TargetLocation;

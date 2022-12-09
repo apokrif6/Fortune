@@ -1,6 +1,5 @@
 ﻿#include "LightingNavigator.h"
 
-#include "TexAlignTools.h"
 #include "Components/BoxComponent.h"
 #include "Components/TimelineComponent.h"
 #include "Fortune/FortuneCharacter.h"
@@ -15,9 +14,11 @@ ALightingNavigator::ALightingNavigator()
 	Trigger->SetCollisionProfileName(TEXT("Trigger"));
 	Trigger->SetupAttachment(RootComponent);
 
-	static ConstructorHelpers::FObjectFinder<UParticleSystem> Particle(TEXT("/Game/StarterContent/Particles/P_Sparks.P_Sparks"));
+	static ConstructorHelpers::FObjectFinder<UParticleSystem> Particle(TEXT("/Game/StarterContent/Particles/P_Fire.P_Fire"));
 	LightingParticle = Particle.Object;
 
+	MovingCurve = CreateDefaultSubobject<UCurveFloat>(FName("Moving curve"));
+	
 	PrimaryActorTick.bCanEverTick = true;
 }
 
@@ -25,6 +26,9 @@ void ALightingNavigator::BeginPlay()
 {
 	Super::BeginPlay();
 
+	MovingCurve->FloatCurve.UpdateOrAddKey(0.f, 0.f);
+	MovingCurve->FloatCurve.UpdateOrAddKey(SecondsToArriveTarget, 1.f);
+	
 	Trigger->OnComponentBeginOverlap.AddDynamic(this, &ALightingNavigator::OnTrigger);
 
 	GlobalStartLocation = GetActorLocation();
@@ -75,15 +79,14 @@ void ALightingNavigator::MoveEffect()
 	if (MovingCurve)
 	{
 		FOnTimelineFloat ProgressFunction;
-
+		
 		ProgressFunction.BindUFunction(this, HandleRequestFunctionName);
-
+		
 		Timeline.AddInterpFloat(MovingCurve, ProgressFunction);
-
+		
 		Timeline.PlayFromStart();
 	}
 }
-
 
 void ALightingNavigator::OnTrigger(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent,
 	int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
