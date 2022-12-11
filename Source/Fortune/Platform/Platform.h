@@ -22,6 +22,9 @@ public:
 
 	UPROPERTY(EditAnywhere, Category = "Timeline")
 	UCurveFloat* CurveFloat;
+
+	UPROPERTY(EditAnywhere, Category = "Timeline")
+	float SecondsToArriveTarget = 1.f;
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Meta = (MakeEditWidget))
 	FVector TargetLocation;
@@ -42,4 +45,6 @@ protected:
 	void BasicSetup();
 
 	virtual void Move();
+
+	virtual void CreateCurve();
 };

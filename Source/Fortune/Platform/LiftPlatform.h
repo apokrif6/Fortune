@@ -26,4 +26,6 @@ public:
 
 protected:
 	virtual void Move() override;
+
+	virtual void CreateCurve() override;
 };

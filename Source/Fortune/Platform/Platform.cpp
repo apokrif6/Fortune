@@ -39,3 +39,7 @@ void APlatform::BasicSetup()
 void APlatform::Move()
 {
 }
+
+void APlatform::CreateCurve()
+{
+}

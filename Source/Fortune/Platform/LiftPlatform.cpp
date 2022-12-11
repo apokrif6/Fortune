@@ -59,3 +59,7 @@ void ALiftPlatform::Move()
 		Timeline.PlayFromStart();
 	}
 }
+
+void ALiftPlatform::CreateCurve()
+{
+}

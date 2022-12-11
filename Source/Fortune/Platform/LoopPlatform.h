@@ -4,9 +4,6 @@
 #include "Platform.h"
 #include "LoopPlatform.generated.h"
 
-/**
- * 
- */
 UCLASS()
 class FORTUNE_API ALoopPlatform : public APlatform
 {
@@ -20,4 +17,6 @@ public:
 
 protected:
 	virtual void Move() override;
+
+	virtual void CreateCurve() override;
 };
