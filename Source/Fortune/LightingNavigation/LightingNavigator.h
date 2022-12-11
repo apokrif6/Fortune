@@ -30,7 +30,10 @@ public:
 	UPROPERTY(EditAnywhere, Category = "Timeline")
 	float SecondsToArriveTarget = 1.f;
 	
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Meta = (MakeEditWidget))
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Meta = (MakeEditWidget), Category = "Effect Locations")
+	FVector StartLocation;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Meta = (MakeEditWidget), Category = "Effect Locations")
 	FVector TargetLocation;
 	
 	UFUNCTION()

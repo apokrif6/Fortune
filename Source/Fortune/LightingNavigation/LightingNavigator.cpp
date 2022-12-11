@@ -31,7 +31,7 @@ void ALightingNavigator::BeginPlay()
 	
 	Trigger->OnComponentBeginOverlap.AddDynamic(this, &ALightingNavigator::OnTrigger);
 
-	GlobalStartLocation = GetActorLocation();
+	GlobalStartLocation = GetTransform().TransformPosition(StartLocation);
 	
 	GlobalTargetLocation = GetTransform().TransformPosition(TargetLocation);
 }
