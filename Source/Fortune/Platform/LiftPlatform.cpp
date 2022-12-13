@@ -17,7 +17,6 @@ void ALiftPlatform::BeginPlay()
 	BoxCollision->OnComponentBeginOverlap.AddDynamic(this, &ALiftPlatform::OnStep);
 	BoxCollision->OnComponentEndOverlap.AddDynamic(this, &ALiftPlatform::OnExit);
 
-	GlobalStartLocation = GetActorLocation();
 	GlobalTargetLocation = GetTransform().TransformPosition(TargetLocation);
 }
 
@@ -61,6 +60,8 @@ void ALiftPlatform::Move()
 		Timeline.AddInterpFloat(CurveFloat, ProgressFunction);
 		SetLooping(false);
 
+		GlobalStartLocation = GetActorLocation();
+		
 		Timeline.PlayFromStart();
 	}
 }
@@ -71,10 +72,8 @@ void ALiftPlatform::SwitchTargetLocation()
 	{
 		GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Red, TEXT("Switched!"));
 	}
-	
-	const FVector TemporaryGlobalStartLocation = GlobalStartLocation;
-	GlobalStartLocation = GlobalTargetLocation;
-	GlobalTargetLocation = TemporaryGlobalStartLocation;
+
+	Timeline.Reverse();
 }
 
 

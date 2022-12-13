@@ -19,6 +19,11 @@ public:
 	
 	UPROPERTY(EditAnywhere, Category = BoxCollision)
 	UBoxComponent* BoxCollision;
+
+	UPROPERTY()
+	FVector StartLocation;
+
+	bool bShouldSwitchLocation;
 	
 	UFUNCTION()
 	virtual void OnStep(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent,
