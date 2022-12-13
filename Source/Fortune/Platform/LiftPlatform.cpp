@@ -5,8 +5,6 @@
 
 ALiftPlatform::ALiftPlatform()
 {
-	BasicSetup();
-	
 	BoxCollision = CreateDefaultSubobject<UBoxComponent>(TEXT("Box collision"));
 	BoxCollision->SetCollisionProfileName(TEXT("Trigger"));
 	BoxCollision->SetupAttachment(RootComponent);
@@ -17,6 +15,10 @@ void ALiftPlatform::BeginPlay()
 	Super::BeginPlay();
 	
 	BoxCollision->OnComponentBeginOverlap.AddDynamic(this, &ALiftPlatform::OnStep);
+	BoxCollision->OnComponentEndOverlap.AddDynamic(this, &ALiftPlatform::OnExit);
+
+	GlobalStartLocation = GetActorLocation();
+	GlobalTargetLocation = GetTransform().TransformPosition(TargetLocation);
 }
 
 
@@ -33,12 +35,18 @@ void ALiftPlatform::OnStep(UPrimitiveComponent* OverlappedComponent, AActor* Oth
 		return;
 	}
 
-	if (GEngine)
+	Move();
+}
+
+void ALiftPlatform::OnExit(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent,
+	int32 OtherBodyIndex)
+{
+	if (Cast<AFortuneCharacter>(OtherActor) == nullptr)
 	{
-		GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Red, TEXT("Step!"));
+		return;
 	}
 
-	Move();
+	SwitchTargetLocation();
 }
 
 
@@ -53,12 +61,22 @@ void ALiftPlatform::Move()
 		Timeline.AddInterpFloat(CurveFloat, ProgressFunction);
 		SetLooping(false);
 
-		GlobalStartLocation = GetActorLocation();
-		GlobalTargetLocation = GetTransform().TransformPosition(TargetLocation);
-
 		Timeline.PlayFromStart();
 	}
 }
+
+void ALiftPlatform::SwitchTargetLocation()
+{
+	if (GEngine)
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Red, TEXT("Switched!"));
+	}
+	
+	const FVector TemporaryGlobalStartLocation = GlobalStartLocation;
+	GlobalStartLocation = GlobalTargetLocation;
+	GlobalTargetLocation = TemporaryGlobalStartLocation;
+}
+
 
 void ALiftPlatform::CreateCurve()
 {

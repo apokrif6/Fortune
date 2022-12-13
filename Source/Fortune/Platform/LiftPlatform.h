@@ -24,8 +24,14 @@ public:
 	virtual void OnStep(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent,
 		int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
 
+	UFUNCTION()
+	virtual void OnExit(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent,
+		int32 OtherBodyIndex);
+	
 protected:
 	virtual void Move() override;
 
+	virtual void SwitchTargetLocation();
+	
 	virtual void CreateCurve() override;
 };

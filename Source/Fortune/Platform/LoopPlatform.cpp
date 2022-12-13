@@ -2,7 +2,6 @@
 
 ALoopPlatform::ALoopPlatform()
 {
-	BasicSetup();
 }
 
 void ALoopPlatform::BeginPlay()
