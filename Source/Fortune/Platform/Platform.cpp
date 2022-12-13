@@ -3,11 +3,15 @@
 APlatform::APlatform()
 {
 	BasicSetup();
+
+	CurveFloat = CreateDefaultSubobject<UCurveFloat>(FName("Looping curve"));
 }
 
 void APlatform::BeginPlay()
 {
 	Super::BeginPlay();
+
+	CreateCurve();
 }
 
 void APlatform::Tick(float DeltaTime)

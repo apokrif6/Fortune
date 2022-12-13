@@ -62,4 +62,6 @@ void ALiftPlatform::Move()
 
 void ALiftPlatform::CreateCurve()
 {
+	CurveFloat->FloatCurve.UpdateOrAddKey(0.f, 0.f);
+	CurveFloat->FloatCurve.UpdateOrAddKey(SecondsToArriveTarget, 1.f);
 }

@@ -3,15 +3,11 @@
 ALoopPlatform::ALoopPlatform()
 {
 	BasicSetup();
-
-	CurveFloat = CreateDefaultSubobject<UCurveFloat>(FName("Looping curve"));
 }
 
 void ALoopPlatform::BeginPlay()
 {
 	Super::BeginPlay();
-	
-	CreateCurve();
 	
 	Move();
 }
