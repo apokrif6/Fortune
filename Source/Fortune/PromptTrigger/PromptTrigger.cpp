@@ -39,5 +39,7 @@ void APromptTrigger::ShowPrompt()
 		GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Red, TEXT("Triggered!"));
 	}
 
-	OnPromptTrigger.Broadcast();
+	FPrompt TestPrompt = FPrompt("My Test Prompt!");
+	
+	OnPromptTrigger.Broadcast(TestPrompt);
 }

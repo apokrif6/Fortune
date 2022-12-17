@@ -1,7 +1,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Prompt.h"
+#include "FPrompt.h"
 #include "Blueprint/UserWidget.h"
 #include "Components/TextBlock.h"
 #include "PromptWidget.generated.h"
@@ -18,8 +18,8 @@ protected:
 	UTextBlock* PromptTextLabel;
 
 	UFUNCTION()
-	void PromptTriggered();
+	void PromptTriggered(FPrompt Prompt);
 
 public:
-	void ShowPrompt(Prompt Prompt);
+	void ShowPrompt(FPrompt Prompt);
 };

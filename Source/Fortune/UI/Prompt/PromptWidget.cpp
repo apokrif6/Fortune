@@ -22,7 +22,7 @@ bool UPromptWidget::Initialize()
 	return true;
 }
 
-void UPromptWidget::ShowPrompt(Prompt Prompt)
+void UPromptWidget::ShowPrompt(FPrompt Prompt)
 {
 	SetVisibility(ESlateVisibility::Visible);
 
@@ -30,9 +30,7 @@ void UPromptWidget::ShowPrompt(Prompt Prompt)
 
 }
 
-void UPromptWidget::PromptTriggered()
+void UPromptWidget::PromptTriggered(FPrompt Prompt)
 {
-	Prompt NewPrompt = Prompt(FString("Im working!"));
-
-	ShowPrompt(NewPrompt);
+	ShowPrompt(Prompt);
 }

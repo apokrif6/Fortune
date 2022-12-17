@@ -2,12 +2,12 @@
 
 #include "CoreMinimal.h"
 #include "Components/BoxComponent.h"
-#include "Fortune/UI/Prompt/Prompt.h"
+#include "Fortune/UI/Prompt/FPrompt.h"
 #include "Fortune/UI/Prompt/PromptWidget.h"
 #include "GameFramework/Actor.h"
 #include "PromptTrigger.generated.h"
 
-DECLARE_DYNAMIC_MULTICAST_DELEGATE(FKFOnPromptTrigger);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnPromptTrigger, FPrompt, Prompt);
 
 UCLASS()
 class FORTUNE_API APromptTrigger : public AActor
@@ -21,9 +21,9 @@ public:
 	UBoxComponent* BoxCollision;
 
 	UPROPERTY(BlueprintAssignable)
-	FKFOnPromptTrigger OnPromptTrigger;
+	FOnPromptTrigger OnPromptTrigger;
 	
-	Prompt Prompt;
+	FPrompt Prompt;
 
 protected:
 	virtual void BeginPlay() override;
