@@ -18,6 +18,8 @@ class AFortuneCharacter : public ACharacter
 	/** Follow camera */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
 	class UCameraComponent* FollowCamera;
+
+	bool bIsGamePaused;
 public:
 	AFortuneCharacter();
 
@@ -29,6 +31,8 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category=Camera)
 	float BaseLookUpRate;
 
+	void UnpauseGame();
+	
 protected:
 
 	/** Resets HMD orientation in VR. */

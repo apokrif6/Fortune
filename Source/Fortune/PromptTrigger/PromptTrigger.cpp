@@ -1,5 +1,6 @@
 ﻿#include "PromptTrigger.h"
 #include "Fortune/FortuneCharacter.h"
+#include "GameFramework/GameStateBase.h"
 #include "Kismet/GameplayStatics.h"
 
 APromptTrigger::APromptTrigger()
@@ -42,4 +43,11 @@ void APromptTrigger::ShowPrompt()
 	FPrompt TestPrompt = FPrompt("My Test Prompt!");
 	
 	OnPromptTrigger.Broadcast(TestPrompt);
+
+	PauseGame();
+}
+
+void APromptTrigger::PauseGame()
+{
+	UGameplayStatics::SetGamePaused(GetWorld(), true);
 }

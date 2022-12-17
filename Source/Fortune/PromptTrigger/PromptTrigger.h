@@ -31,7 +31,7 @@ protected:
 public:
 	void ShowPrompt();
 
-	void FreezePlayer();
+	void PauseGame();
 	
 	virtual void Tick(float DeltaTime) override;
 	

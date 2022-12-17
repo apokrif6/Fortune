@@ -8,6 +8,7 @@
 #include "GameFramework/CharacterMovementComponent.h"
 #include "GameFramework/Controller.h"
 #include "GameFramework/SpringArmComponent.h"
+#include "Kismet/GameplayStatics.h"
 
 //////////////////////////////////////////////////////////////////////////
 // AFortuneCharacter
@@ -56,7 +57,9 @@ void AFortuneCharacter::SetupPlayerInputComponent(class UInputComponent* PlayerI
 	check(PlayerInputComponent);
 	PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &ACharacter::Jump);
 	PlayerInputComponent->BindAction("Jump", IE_Released, this, &ACharacter::StopJumping);
-
+	FInputActionBinding& UnpauseBinding = PlayerInputComponent->BindAction("Unpause", IE_Released, this, &AFortuneCharacter::UnpauseGame);
+	UnpauseBinding.bExecuteWhenPaused = true;
+	
 	PlayerInputComponent->BindAxis("MoveForward", this, &AFortuneCharacter::MoveForward);
 	PlayerInputComponent->BindAxis("MoveRight", this, &AFortuneCharacter::MoveRight);
 
@@ -137,4 +140,9 @@ void AFortuneCharacter::MoveRight(float Value)
 		// add movement in that direction
 		AddMovementInput(Direction, Value);
 	}
+}
+
+void AFortuneCharacter::UnpauseGame()
+{
+	UGameplayStatics::SetGamePaused(GetWorld(), false);
 }
