@@ -6,6 +6,8 @@
 #include "GameFramework/Character.h"
 #include "FortuneCharacter.generated.h"
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnPromptHideTrigger);
+
 UCLASS(config=Game)
 class AFortuneCharacter : public ACharacter
 {
@@ -31,6 +33,9 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category=Camera)
 	float BaseLookUpRate;
 
+	UPROPERTY(BlueprintAssignable)
+	FOnPromptHideTrigger OnPromptHideTrigger;
+	
 	void UnpauseGame();
 	
 protected:

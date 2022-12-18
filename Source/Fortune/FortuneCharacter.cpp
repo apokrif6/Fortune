@@ -144,5 +144,7 @@ void AFortuneCharacter::MoveRight(float Value)
 
 void AFortuneCharacter::UnpauseGame()
 {
+	OnPromptHideTrigger.Broadcast();
+	
 	UGameplayStatics::SetGamePaused(GetWorld(), false);
 }

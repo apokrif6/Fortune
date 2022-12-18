@@ -35,14 +35,9 @@ void APromptTrigger::OnStep(UPrimitiveComponent* OverlappedComponent, AActor* Ot
 
 void APromptTrigger::ShowPrompt()
 {
-	if (GEngine)
-	{
-		GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Red, TEXT("Triggered!"));
-	}
-
 	FPrompt TestPrompt = FPrompt("My Test Prompt!");
 	
-	OnPromptTrigger.Broadcast(TestPrompt);
+	OnPromptShowTrigger.Broadcast(TestPrompt);
 
 	PauseGame();
 }

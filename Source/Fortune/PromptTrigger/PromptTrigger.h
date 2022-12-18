@@ -7,7 +7,7 @@
 #include "GameFramework/Actor.h"
 #include "PromptTrigger.generated.h"
 
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnPromptTrigger, FPrompt, Prompt);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnPromptShowTrigger, FPrompt, Prompt);
 
 UCLASS()
 class FORTUNE_API APromptTrigger : public AActor
@@ -21,7 +21,7 @@ public:
 	UBoxComponent* BoxCollision;
 
 	UPROPERTY(BlueprintAssignable)
-	FOnPromptTrigger OnPromptTrigger;
+	FOnPromptShowTrigger OnPromptShowTrigger;
 	
 	FPrompt Prompt;
 

@@ -18,8 +18,13 @@ protected:
 	UTextBlock* PromptTextLabel;
 
 	UFUNCTION()
-	void PromptTriggered(FPrompt Prompt);
+	void ShotPromptTriggered(FPrompt Prompt);
 
+	UFUNCTION()
+	void HidePromptTriggered();
+	
 public:
 	void ShowPrompt(FPrompt Prompt);
+
+	void HidePrompt();
 };
