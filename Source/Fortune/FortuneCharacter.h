@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "Components/CharacterInteractionLineTrace.h"
 #include "GameFramework/Character.h"
 #include "FortuneCharacter.generated.h"
 
@@ -22,6 +23,8 @@ class AFortuneCharacter : public ACharacter
 	class UCameraComponent* FollowCamera;
 
 	bool bIsGamePaused;
+
+	UCharacterInteractionLineTrace* CharacterInteractionLineTrace;
 public:
 	AFortuneCharacter();
 
@@ -37,6 +40,8 @@ public:
 	FOnPromptHideTrigger OnPromptHideTrigger;
 	
 	void UnpauseGame();
+
+	void Interact() ;
 	
 protected:
 
