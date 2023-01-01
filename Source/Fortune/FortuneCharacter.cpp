@@ -1,6 +1,7 @@
 // Copyright Epic Games, Inc. All Rights Reserved.
 
 #include "FortuneCharacter.h"
+#include "DrawDebugHelpers.h"
 #include "HeadMountedDisplayFunctionLibrary.h"
 #include "Camera/CameraComponent.h"
 #include "Components/CapsuleComponent.h"
@@ -155,6 +156,5 @@ void AFortuneCharacter::UnpauseGame()
 
 void AFortuneCharacter::Interact()
 {
-	GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Red, TEXT("Pressed!"));
+	CharacterInteractionLineTrace->InteractWithObject();
 }
-
