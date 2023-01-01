@@ -21,7 +21,10 @@ bool UPromptWidget::Initialize()
 	}
 
 	AFortuneCharacter* FortuneCharacter = Cast<AFortuneCharacter>(UGameplayStatics::GetPlayerCharacter(GetWorld(), 0));
-	FortuneCharacter->OnPromptHideTrigger.AddDynamic(this, &UPromptWidget::HidePromptTriggered);
+	if (FortuneCharacter)
+	{
+		FortuneCharacter->OnPromptHideTrigger.AddDynamic(this, &UPromptWidget::HidePromptTriggered);
+	}
 	
 	return true;
 }
