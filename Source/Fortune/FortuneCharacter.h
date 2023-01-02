@@ -41,7 +41,9 @@ public:
 	
 	void UnpauseGame();
 
-	void Interact() ;
+	void Interact();
+
+	void ChangeCameraToMain();
 	
 protected:
 

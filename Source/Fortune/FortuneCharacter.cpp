@@ -158,3 +158,10 @@ void AFortuneCharacter::Interact()
 {
 	CharacterInteractionLineTrace->InteractWithObject();
 }
+
+void AFortuneCharacter::ChangeCameraToMain()
+{
+	APlayerController* PlayerController = UGameplayStatics::GetPlayerController(this, 0);
+	PlayerController->SetViewTargetWithBlend(this, 1.f);
+
+}

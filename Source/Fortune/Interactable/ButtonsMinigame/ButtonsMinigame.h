@@ -14,8 +14,11 @@ class FORTUNE_API AButtonsMinigame : public AStaticMeshActor, public IInteractab
 public:
 	AButtonsMinigame();
 
-	UPROPERTY(VisibleAnywhere)
+	UPROPERTY(VisibleAnywhere, Category="CameraComponent")
 	UCameraComponent* CameraComponent;
+
+	UPROPERTY(VisibleAnywhere, Category="CameraComponent")
+	float CameraBlendTime = 1.f;
 	
 	UPROPERTY(VisibleAnywhere)
 	UStaticMeshComponent* GreenButton;
@@ -24,4 +27,11 @@ public:
 	UStaticMeshComponent* BlackButton;
 	
 	virtual void Interact() override;
+
+private:
+	void StartGame(APlayerController* PlayerController);
+
+	void EndGame(APlayerController* PlayerController);
+
+	void IgnoreMovementInput(APlayerController* PlayerController, bool bCanMove);
 };
