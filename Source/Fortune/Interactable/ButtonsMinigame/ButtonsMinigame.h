@@ -29,9 +29,27 @@ public:
 	virtual void Interact() override;
 
 private:
+	void BeginPlay() override;
+	
 	void StartGame(APlayerController* PlayerController);
 
-	void EndGame(APlayerController* PlayerController);
+	void EndGame();
 
 	void IgnoreMovementInput(APlayerController* PlayerController, bool bCanMove);
+
+	void CheckAnswer();
+
+	void Win();
+
+	void Lose();
+	
+	UFUNCTION()
+	virtual void OnGreenButtonClicked(UPrimitiveComponent* PrimitiveComponent, FKey Key);
+
+	UFUNCTION()
+	virtual void OnBlackButtonClicked(UPrimitiveComponent* PrimitiveComponent, FKey Key);
+	
+	TArray<int> CurrentAnswer;
+	
+	TArray<int> RightAnswer = TArray<int> {2, 1};
 };

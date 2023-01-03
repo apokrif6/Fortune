@@ -14,11 +14,16 @@ AButtonsMinigame::AButtonsMinigame()
 	BlackButton->SetupAttachment(RootComponent);
 }
 
+void AButtonsMinigame::BeginPlay()
+{
+	Super::BeginPlay();
+	
+	GreenButton->OnClicked.AddDynamic(this, &AButtonsMinigame::OnGreenButtonClicked);
+	BlackButton->OnClicked.AddDynamic(this, &AButtonsMinigame::OnBlackButtonClicked);
+}
 
 void AButtonsMinigame::Interact()
 {
-	GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Red, TEXT("Game started!"));
-
 	APlayerController* PlayerController = UGameplayStatics::GetPlayerController(this, 0);
 
 	StartGame(PlayerController);
@@ -31,11 +36,14 @@ void AButtonsMinigame::StartGame(APlayerController* PlayerController)
 	IgnoreMovementInput(PlayerController, true);
 }
 
-void AButtonsMinigame::EndGame(APlayerController* PlayerController)
+void AButtonsMinigame::EndGame()
 {
+	CurrentAnswer.Empty();
+	
 	AFortuneCharacter* FortuneCharacter = Cast<AFortuneCharacter>(UGameplayStatics::GetPlayerCharacter(GetWorld(), 0));
 	FortuneCharacter->ChangeCameraToMain();
 
+	APlayerController* PlayerController = UGameplayStatics::GetPlayerController(this, 0);
 	IgnoreMovementInput(PlayerController, false);
 }
 
@@ -46,3 +54,48 @@ void AButtonsMinigame::IgnoreMovementInput(APlayerController* PlayerController, 
 	PlayerController->SetIgnoreMoveInput(bCanMove);
 	PlayerController->SetShowMouseCursor(bCanMove);
 }
+
+void AButtonsMinigame::CheckAnswer()
+{
+	if (CurrentAnswer == RightAnswer)
+	{
+		Win();
+	} else
+	{
+		Lose();
+	}
+	
+	EndGame();
+}
+
+void AButtonsMinigame::Win()
+{
+	GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Red, "You win!");
+}
+
+void AButtonsMinigame::Lose()
+{
+	GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Red, "You lose!");\
+}
+
+
+void AButtonsMinigame::OnGreenButtonClicked(UPrimitiveComponent* PrimitiveComponent, FKey Key)
+{
+	CurrentAnswer.Push(1);
+	
+	if (CurrentAnswer.Num() == RightAnswer.Num())
+	{
+		CheckAnswer();
+	}
+}
+
+void AButtonsMinigame::OnBlackButtonClicked(UPrimitiveComponent* PrimitiveComponent, FKey Key)
+{
+	CurrentAnswer.Push(2);
+
+	if (CurrentAnswer.Num() == RightAnswer.Num())
+	{
+		CheckAnswer();
+	}
+}
+
