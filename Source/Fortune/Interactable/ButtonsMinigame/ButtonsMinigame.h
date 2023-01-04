@@ -21,10 +21,13 @@ public:
 	float CameraBlendTime = 1.f;
 	
 	UPROPERTY(VisibleAnywhere)
-	UStaticMeshComponent* GreenButton;
+	UStaticMeshComponent* RedButton;
 
 	UPROPERTY(VisibleAnywhere)
-	UStaticMeshComponent* BlackButton;
+	UStaticMeshComponent* PurpleButton;
+
+	UPROPERTY(VisibleAnywhere)
+	UStaticMeshComponent* BlueButton;
 
 	UPROPERTY(EditAnywhere, Category="ResultSound")
 	USoundBase* RightAnswerSound;
@@ -51,12 +54,15 @@ private:
 	void Lose();
 	
 	UFUNCTION()
-	virtual void OnGreenButtonClicked(UPrimitiveComponent* PrimitiveComponent, FKey Key);
+	virtual void OnRedButtonClicked(UPrimitiveComponent* PrimitiveComponent, FKey Key);
 
 	UFUNCTION()
-	virtual void OnBlackButtonClicked(UPrimitiveComponent* PrimitiveComponent, FKey Key);
+	virtual void OnPurpleButtonClicked(UPrimitiveComponent* PrimitiveComponent, FKey Key);
+
+	UFUNCTION()
+	virtual void OnBlueButtonClicked(UPrimitiveComponent* PrimitiveComponent, FKey Key);
 	
 	TArray<int> CurrentAnswer;
 	
-	TArray<int> RightAnswer = TArray<int> {2, 1};
+	TArray<int> RightAnswer = TArray<int> {2, 1, 3};
 };

@@ -8,18 +8,21 @@ AButtonsMinigame::AButtonsMinigame()
 	CameraComponent = CreateDefaultSubobject<UCameraComponent>(TEXT("Camera component"));
 	CameraComponent->SetupAttachment(RootComponent);
 
-	GreenButton = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Green button"));
-	GreenButton->SetupAttachment(RootComponent);
-	BlackButton = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Black button"));
-	BlackButton->SetupAttachment(RootComponent);
+	RedButton = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Red button"));
+	RedButton->SetupAttachment(RootComponent);
+	PurpleButton = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Black button"));
+	PurpleButton->SetupAttachment(RootComponent);
+	BlueButton = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Blue button"));
+	BlueButton->SetupAttachment(RootComponent);
 }
 
 void AButtonsMinigame::BeginPlay()
 {
 	Super::BeginPlay();
 	
-	GreenButton->OnClicked.AddDynamic(this, &AButtonsMinigame::OnGreenButtonClicked);
-	BlackButton->OnClicked.AddDynamic(this, &AButtonsMinigame::OnBlackButtonClicked);
+	RedButton->OnClicked.AddDynamic(this, &AButtonsMinigame::OnRedButtonClicked);
+	PurpleButton->OnClicked.AddDynamic(this, &AButtonsMinigame::OnPurpleButtonClicked);
+	BlueButton->OnClicked.AddDynamic(this, &AButtonsMinigame::OnBlueButtonClicked);
 }
 
 void AButtonsMinigame::Interact()
@@ -86,17 +89,23 @@ void AButtonsMinigame::Lose()
 }
 
 
-void AButtonsMinigame::OnGreenButtonClicked(UPrimitiveComponent* PrimitiveComponent, FKey Key)
+void AButtonsMinigame::OnRedButtonClicked(UPrimitiveComponent* PrimitiveComponent, FKey Key)
 {
 	CurrentAnswer.Push(1);
 
 	CheckAnswer();
 }
 
-void AButtonsMinigame::OnBlackButtonClicked(UPrimitiveComponent* PrimitiveComponent, FKey Key)
+void AButtonsMinigame::OnPurpleButtonClicked(UPrimitiveComponent* PrimitiveComponent, FKey Key)
 {
 	CurrentAnswer.Push(2);
 
 	CheckAnswer();
 }
 
+void AButtonsMinigame::OnBlueButtonClicked(UPrimitiveComponent* PrimitiveComponent, FKey Key)
+{
+	CurrentAnswer.Push(3);
+
+	CheckAnswer();
+}
