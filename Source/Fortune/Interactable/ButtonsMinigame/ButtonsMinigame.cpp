@@ -57,6 +57,9 @@ void AButtonsMinigame::IgnoreMovementInput(APlayerController* PlayerController, 
 
 void AButtonsMinigame::CheckAnswer()
 {
+	if (!CurrentAnswer.Num() == RightAnswer.Num())
+		return;
+	
 	if (CurrentAnswer == RightAnswer)
 	{
 		Win();
@@ -82,20 +85,14 @@ void AButtonsMinigame::Lose()
 void AButtonsMinigame::OnGreenButtonClicked(UPrimitiveComponent* PrimitiveComponent, FKey Key)
 {
 	CurrentAnswer.Push(1);
-	
-	if (CurrentAnswer.Num() == RightAnswer.Num())
-	{
-		CheckAnswer();
-	}
+
+	CheckAnswer();
 }
 
 void AButtonsMinigame::OnBlackButtonClicked(UPrimitiveComponent* PrimitiveComponent, FKey Key)
 {
 	CurrentAnswer.Push(2);
 
-	if (CurrentAnswer.Num() == RightAnswer.Num())
-	{
-		CheckAnswer();
-	}
+	CheckAnswer();
 }
 
