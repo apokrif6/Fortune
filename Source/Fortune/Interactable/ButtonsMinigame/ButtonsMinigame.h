@@ -25,6 +25,13 @@ public:
 
 	UPROPERTY(VisibleAnywhere)
 	UStaticMeshComponent* BlackButton;
+
+	UPROPERTY(EditAnywhere, Category="ResultSound")
+	USoundBase* RightAnswerSound;
+	
+	UPROPERTY(EditAnywhere, Category="ResultSound")
+	USoundBase* WrongAnswerSound;
+	
 	
 	virtual void Interact() override;
 

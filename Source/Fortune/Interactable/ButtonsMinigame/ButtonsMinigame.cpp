@@ -57,7 +57,7 @@ void AButtonsMinigame::IgnoreMovementInput(APlayerController* PlayerController, 
 
 void AButtonsMinigame::CheckAnswer()
 {
-	if (!CurrentAnswer.Num() == RightAnswer.Num())
+	if (CurrentAnswer.Num() != RightAnswer.Num())
 		return;
 	
 	if (CurrentAnswer == RightAnswer)
@@ -74,11 +74,15 @@ void AButtonsMinigame::CheckAnswer()
 void AButtonsMinigame::Win()
 {
 	GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Red, "You win!");
+	
+	UGameplayStatics::PlaySoundAtLocation(this, RightAnswerSound, GetActorLocation());
 }
 
 void AButtonsMinigame::Lose()
 {
-	GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Red, "You lose!");\
+	GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Red, "You lose!");
+
+	UGameplayStatics::PlaySoundAtLocation(this, WrongAnswerSound, GetActorLocation());
 }
 
 
