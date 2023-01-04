@@ -14,11 +14,14 @@ class FORTUNE_API ACoin : public AActor, public ICollectable
 public:
 	ACoin();
 
-	UPROPERTY(VisibleAnywhere)
+	UPROPERTY(EditAnywhere)
 	UStaticMeshComponent* CoinMesh;
 
 	UPROPERTY(VisibleAnywhere)
 	URotatingMovementComponent* RotatingMovementComponent;
+
+	UPROPERTY(EditAnywhere)
+	USoundBase* CollectionSound;
 	
 protected:
 	virtual void BeginPlay() override;

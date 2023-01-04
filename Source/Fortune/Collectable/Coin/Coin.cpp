@@ -1,5 +1,7 @@
 ﻿#include "Coin.h"
 
+#include "Kismet/GameplayStatics.h"
+
 ACoin::ACoin()
 {
 	static ConstructorHelpers::FObjectFinder<UStaticMesh>CoinMeshAsset(TEXT("StaticMesh'/Game/StarterContent/Shapes/Shape_Cube.Shape_Cube'"));
@@ -27,11 +29,8 @@ void ACoin::Tick(float DeltaTime)
 void ACoin::OnCollect(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent,
 	int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
-	if (GEngine)
-	{
-		GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Red, TEXT("Collected!"));
-		Destroy();
-	}
+	UGameplayStatics::PlaySoundAtLocation(this, CollectionSound, GetActorLocation());
+	Destroy();
 }
 
 
