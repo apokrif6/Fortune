@@ -14,6 +14,8 @@ void ALoopPlatform::BeginPlay()
 
 void ALoopPlatform::CreateCurve()
 {
+	Super::CreateCurve();
+
 	CurveFloat->FloatCurve.UpdateOrAddKey(0.f, 0.f);
 	CurveFloat->FloatCurve.UpdateOrAddKey(SecondsToArriveTarget, 1.f);
 	CurveFloat->FloatCurve.UpdateOrAddKey(SecondsToArriveTarget * 2, 0.f);

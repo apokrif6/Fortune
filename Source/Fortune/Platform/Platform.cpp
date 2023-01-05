@@ -3,8 +3,6 @@
 APlatform::APlatform()
 {
 	BasicSetup();
-
-	CurveFloat = CreateDefaultSubobject<UCurveFloat>(FName("Looping curve"));
 }
 
 void APlatform::BeginPlay()
@@ -46,4 +44,5 @@ void APlatform::Move()
 
 void APlatform::CreateCurve()
 {
+	CurveFloat = NewObject<UCurveFloat>();
 }

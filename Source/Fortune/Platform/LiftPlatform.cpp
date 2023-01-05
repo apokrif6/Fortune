@@ -1,7 +1,5 @@
 #include "LiftPlatform.h"
-
 #include "Fortune/FortuneCharacter.h"
-
 
 ALiftPlatform::ALiftPlatform()
 {
@@ -19,7 +17,6 @@ void ALiftPlatform::BeginPlay()
 
 	GlobalTargetLocation = GetTransform().TransformPosition(TargetLocation);
 }
-
 
 void ALiftPlatform::Tick(float DeltaTime)
 {
@@ -76,9 +73,10 @@ void ALiftPlatform::SwitchTargetLocation()
 	Timeline.Reverse();
 }
 
-
 void ALiftPlatform::CreateCurve()
 {
+	Super::CreateCurve();
+	
 	CurveFloat->FloatCurve.UpdateOrAddKey(0.f, 0.f);
 	CurveFloat->FloatCurve.UpdateOrAddKey(SecondsToArriveTarget, 1.f);
 }

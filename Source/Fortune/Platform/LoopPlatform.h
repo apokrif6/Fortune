@@ -14,7 +14,6 @@ public:
 
 	virtual void BeginPlay() override;
 
-
 protected:
 	virtual void Move() override;
 
