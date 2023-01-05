@@ -35,9 +35,12 @@ void APromptTrigger::OnStep(UPrimitiveComponent* OverlappedComponent, AActor* Ot
 
 void APromptTrigger::ShowPrompt()
 {
-	FPrompt TestPrompt = FPrompt("My Test Prompt!");
-	
-	OnPromptShowTrigger.Broadcast(TestPrompt);
+	if (!PromptText.IsEmpty())
+	{
+		Prompt = FPrompt(PromptText);
+	}
+
+	OnPromptShowTrigger.Broadcast(Prompt);
 
 	PauseGame();
 }

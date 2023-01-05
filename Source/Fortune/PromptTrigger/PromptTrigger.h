@@ -22,6 +22,9 @@ public:
 
 	UPROPERTY(BlueprintAssignable)
 	FOnPromptShowTrigger OnPromptShowTrigger;
+
+	UPROPERTY(EditAnywhere, Category = PromptText)
+	FString PromptText;
 	
 	FPrompt Prompt;
 
