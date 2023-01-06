@@ -41,6 +41,9 @@ public:
 		int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
 
 	UFUNCTION()
+	void OnTimelineFinish();
+	
+	UFUNCTION()
 	void HandleMovingProgress(float Value);
 	
 	virtual void BeginPlay() override;
@@ -52,6 +55,8 @@ private:
 	UParticleSystemComponent* LightingParticleSystemComponent;
 
 	FName HandleRequestFunctionName = "HandleMovingProgress";
+
+	FName ProgressFinishFunctionName = "OnTimelineFinish";
 	
 	FTimerHandle ActivityHandler;
 

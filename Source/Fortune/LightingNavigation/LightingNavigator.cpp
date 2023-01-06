@@ -17,8 +17,6 @@ ALightingNavigator::ALightingNavigator()
 	static ConstructorHelpers::FObjectFinder<UParticleSystem> Particle(TEXT("/Game/StarterContent/Particles/P_Fire.P_Fire"));
 	LightingParticle = Particle.Object;
 
-	MovingCurve = CreateDefaultSubobject<UCurveFloat>(FName("Moving curve"));
-	
 	PrimaryActorTick.bCanEverTick = true;
 }
 
@@ -26,6 +24,7 @@ void ALightingNavigator::BeginPlay()
 {
 	Super::BeginPlay();
 
+	MovingCurve = NewObject<UCurveFloat>();
 	MovingCurve->FloatCurve.UpdateOrAddKey(0.f, 0.f);
 	MovingCurve->FloatCurve.UpdateOrAddKey(SecondsToArriveTarget, 1.f);
 	
@@ -50,16 +49,11 @@ void ALightingNavigator::Appear()
 	LightingParticleSystemComponent = UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), LightingParticle, GlobalStartLocation);
 
 	MoveEffect();
-	
-	if (GEngine)
-	{
-		GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Red, TEXT("T"));
-	}
 }
 
 void ALightingNavigator::Disappear()
 {
-	
+	LightingParticleSystemComponent->DestroyComponent();
 }
 
 void ALightingNavigator::MarkAsTriggered()
@@ -79,12 +73,16 @@ void ALightingNavigator::MoveEffect()
 	if (MovingCurve)
 	{
 		FOnTimelineFloat ProgressFunction;
+		FOnTimelineEvent OnProgressFunctionFinish;
 		
 		ProgressFunction.BindUFunction(this, HandleRequestFunctionName);
+		OnProgressFunctionFinish.BindUFunction(this, ProgressFinishFunctionName);
 		
 		Timeline.AddInterpFloat(MovingCurve, ProgressFunction);
 		
 		Timeline.PlayFromStart();
+
+		Timeline.SetTimelineFinishedFunc(OnProgressFunctionFinish);
 	}
 }
 
@@ -100,6 +98,11 @@ void ALightingNavigator::OnTrigger(UPrimitiveComponent* OverlappedComponent, AAc
 	{
 		Appear();
 	}
+}
+
+void ALightingNavigator::OnTimelineFinish()
+{
+	Disappear();
 }
 
 void ALightingNavigator::HandleMovingProgress(float Value)
