@@ -14,7 +14,7 @@ ALightingNavigator::ALightingNavigator()
 	Trigger->SetCollisionProfileName(TEXT("Trigger"));
 	Trigger->SetupAttachment(RootComponent);
 
-	static ConstructorHelpers::FObjectFinder<UParticleSystem> Particle(TEXT("/Game/StarterContent/Particles/P_Fire.P_Fire"));
+	static ConstructorHelpers::FObjectFinder<UParticleSystem> Particle(TEXT("/Game/FXVarietyPack/Particles/P_ky_ThunderBallHit.P_ky_ThunderBallHit"));
 	LightingParticle = Particle.Object;
 
 	PrimaryActorTick.bCanEverTick = true;
