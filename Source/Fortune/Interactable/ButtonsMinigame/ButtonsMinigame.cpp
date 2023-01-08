@@ -76,18 +76,20 @@ void AButtonsMinigame::CheckAnswer()
 
 void AButtonsMinigame::Win()
 {
-	GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Red, "You win!");
-	
-	UGameplayStatics::PlaySoundAtLocation(this, RightAnswerSound, GetActorLocation());
+	PlayResultSound(RightAnswerSound);
+
+	OnGameWon.Broadcast();
 }
 
 void AButtonsMinigame::Lose()
 {
-	GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Red, "You lose!");
-
-	UGameplayStatics::PlaySoundAtLocation(this, WrongAnswerSound, GetActorLocation());
+	PlayResultSound(WrongAnswerSound);
 }
 
+void AButtonsMinigame::PlayResultSound(USoundBase* SoundBase)
+{
+	UGameplayStatics::PlaySoundAtLocation(this, SoundBase, GetActorLocation());
+}
 
 void AButtonsMinigame::OnRedButtonClicked(UPrimitiveComponent* PrimitiveComponent, FKey Key)
 {

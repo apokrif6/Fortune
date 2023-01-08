@@ -4,7 +4,6 @@
 #include "Components/BoxComponent.h"
 #include "Components/TimelineComponent.h"
 #include "Engine/StaticMeshActor.h"
-#include "Particles/ParticleSpriteEmitter.h"
 #include "LightingNavigator.generated.h"
 
 UCLASS()

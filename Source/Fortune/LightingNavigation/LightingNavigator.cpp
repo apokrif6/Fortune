@@ -1,5 +1,4 @@
 ﻿#include "LightingNavigator.h"
-
 #include "Components/BoxComponent.h"
 #include "Components/TimelineComponent.h"
 #include "Fortune/FortuneCharacter.h"

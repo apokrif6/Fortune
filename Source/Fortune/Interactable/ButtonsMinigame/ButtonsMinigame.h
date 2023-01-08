@@ -6,6 +6,8 @@
 #include "Fortune/Interactable/Interactable.h"
 #include "ButtonsMinigame.generated.h"
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FKOnGameWon);
+
 UCLASS()
 class FORTUNE_API AButtonsMinigame : public AStaticMeshActor, public IInteractable
 {
@@ -14,6 +16,9 @@ class FORTUNE_API AButtonsMinigame : public AStaticMeshActor, public IInteractab
 public:
 	AButtonsMinigame();
 
+	UPROPERTY(BlueprintAssignable)
+	FKOnGameWon OnGameWon;
+	
 	UPROPERTY(VisibleAnywhere, Category="CameraComponent")
 	UCameraComponent* CameraComponent;
 
@@ -52,6 +57,8 @@ private:
 	void Win();
 
 	void Lose();
+
+	void PlayResultSound(USoundBase* SoundBase);
 	
 	UFUNCTION()
 	virtual void OnRedButtonClicked(UPrimitiveComponent* PrimitiveComponent, FKey Key);

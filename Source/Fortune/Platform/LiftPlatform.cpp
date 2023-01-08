@@ -65,11 +65,6 @@ void ALiftPlatform::Move()
 
 void ALiftPlatform::SwitchTargetLocation()
 {
-	if (GEngine)
-	{
-		GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Red, TEXT("Switched!"));
-	}
-
 	Timeline.Reverse();
 }
 
