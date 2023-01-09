@@ -1,5 +1,3 @@
-// Copyright Epic Games, Inc. All Rights Reserved.
-
 #pragma once
 
 #include "CoreMinimal.h"
@@ -11,8 +9,14 @@ class AFortuneGameMode : public AGameModeBase
 {
 	GENERATED_BODY()
 
+	USoundBase* GameOverSound;
 public:
 	AFortuneGameMode();
+
+	UFUNCTION()
+	void OnPlayerKilled();
+
+	void RestartLevel();
 };
 
 

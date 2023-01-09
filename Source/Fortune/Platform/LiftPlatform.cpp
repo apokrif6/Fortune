@@ -26,11 +26,6 @@ void ALiftPlatform::Tick(float DeltaTime)
 void ALiftPlatform::OnStep(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent,
 		int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
-	if (Cast<AFortuneCharacter>(OtherActor) == nullptr)
-	{
-		return;
-	}
-
 	Move();
 }
 
